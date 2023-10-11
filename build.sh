@@ -5,10 +5,10 @@
 
 SECONDS=0 # builtin bash timer
 ZIPNAME="QuicksilveRV2-ginkgo-$(date '+%Y%m%d-%H%M').zip"
-TC_DIR="$HOME/tc/clang-r450784d"
-GCC_64_DIR="$HOME/tc/aarch64-linux-android-4.9"
-GCC_32_DIR="$HOME/tc/arm-linux-androideabi-4.9"
-AK3_DIR="$HOME/AnyKernel3"
+TC_DIR="$HOME/kernel/tc/linux-x86/clang-r498229b"
+GCC_64_DIR="$HOME/kernel/tc/aarch64-linux-android-4.9"
+GCC_32_DIR="$HOME/kernel/tc/arm-linux-androideabi-4.9"
+AK3_DIR="$HOME/android/AnyKernel3"
 DEFCONFIG="vendor/ginkgo-perf_defconfig"
 
 MAKE_PARAMS="O=out ARCH=arm64 CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-nm \
@@ -18,6 +18,10 @@ MAKE_PARAMS="O=out ARCH=arm64 CC=clang LD=ld.lld AR=llvm-ar AS=llvm-as NM=llvm-n
 	CROSS_COMPILE_ARM32=$GCC_32_DIR/bin/arm-linux-androideabi-"
 
 export PATH="$TC_DIR/bin:$PATH"
+
+export KBUILD_BUILD_USER=bryll
+export KBUILD_BUILD_HOST=joseph
+
 
 if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
    head=$(git rev-parse --verify HEAD 2>/dev/null); then
